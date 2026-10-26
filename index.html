@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#e6d1bb">
+    <title>Club Pele Única | Por Vanessa Silva</title>
+    
+    <!-- Fontes Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+    
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Variáveis de Cores da Logo */
+        :root {
+            --bg-color: #e6d1bb;      /* Nude/Bege Fundo */
+            --bg-light: #f3e6d8;      /* Bege Claro Cards */
+            --bg-card: #f8efe6;       /* Card Destaque */
+            --text-main: #3b1b0b;     /* Marrom Escuro (Títulos) */
+            --text-muted: #6b412b;    /* Marrom Suave */
+            --accent: #3b1b0b;        /* Cor Botão Principal */
+            --star-color: #e5a93b;    /* Amarelo Estrelas Google */
+            --whatsapp: #25D366;
+            --white: #ffffff;
+            --app-bar-bg: rgba(230, 209, 187, 0.88);
+        }
+
+        /* Reset Básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 85px; /* Espaço para a barra inferior no mobile */
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animações */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================
+           CABEÇALHO (HERO APP)
+        ======================== */
+        .hero {
+            padding: 35px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .avatar-container {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: var(--white);
+            padding: 4px;
+            box-shadow: 0 8px 25px rgba(59, 27, 11, 0.15);
+            margin-bottom: 15px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            max-width: 420px;
+        }
+
+        /* Selo Google 5.0 Stars */
+        .google-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--bg-light);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(59, 27, 11, 0.08);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .google-badge i.fa-google { color: #4285F4; }
+        .stars { color: var(--star-color); font-size: 0.9rem; }
+
+        /* Botões */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 350px;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:active { transform: scale(0.97); }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--white);
+            box-shadow: 0 8px 18px rgba(59, 27, 11, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            border: 1px solid rgba(59, 27, 11, 0.12);
+        }
+
+        /* ========================
+           VITRINE (CARROSSEL MOBILE)
+        ======================== */
+        .section-wrapper {
+            padding: 30px 0 10px;
+        }
+
+        .section-header {
+            padding: 0 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+        }
+
+        .swipe-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding: 10px 20px 25px;
+            scrollbar-width: none;
+        }
+        .swipe-container::-webkit-scrollbar { display: none; }
+
+        .service-card {
+            flex: 0 0 85%;
+            max-width: 310px;
+            scroll-snap-align: center;
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 12px;
+        }
+
+        .service-info {
+            padding: 0 4px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .service-info h3 {
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .service-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .btn-sm {
+            padding: 11px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            background-color: var(--accent);
+            color: var(--white);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ========================
+           DEPOIMENTOS (GOOGLE REVIEWS)
+        ======================== */
+        .review-card {
+            flex: 0 0 85%;
+            max-width: 310px;
+            scroll-snap-align: center;
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+            border: 1px solid rgba(59, 27, 11, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .author-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .author-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .author-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .review-text {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        /* ========================
+           LOCALIZAÇÃO & ENDEREÇO
+        ======================== */
+        .location-card {
+            margin: 0 20px;
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(59, 27, 11, 0.08);
+        }
+
+        .location-info {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .location-info i {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        .location-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .location-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .badge-open {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        .badge-open::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: #2e7d32;
+            border-radius: 50%;
+        }
+
+        /* ========================
+           INSTAGRAM GALERIA
+        ======================== */
+        .insta-grid {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 12px;
+            padding: 10px 20px 25px;
+            scrollbar-width: none;
+        }
+        .insta-grid::-webkit-scrollbar { display: none; }
+
+        .insta-card {
+            flex: 0 0 45%;
+            aspect-ratio: 4/5;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        .insta-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .insta-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(59, 27, 11, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .insta-card:hover .insta-overlay, .insta-card:active .insta-overlay { opacity: 1; }
+
+        /* ========================
+           NAVBAR INFERIOR (APP STYLE)
+        ======================== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--app-bar-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 10px 22px;
+            border-top: 1px solid rgba(255,255,255,0.25);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 500;
+            gap: 3px;
+        }
+
+        .nav-item i { font-size: 1.25rem; }
+
+        .nav-whatsapp {
+            background-color: var(--whatsapp);
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+        }
+
+        /* Botão WPP Flutuante para Desktop */
+        .desktop-wpp {
+            display: none;
+            position: fixed;
+            bottom: 30px; right: 30px;
+            background: var(--whatsapp);
+            color: #fff;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            font-size: 30px;
+            align-items: center; justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1001;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px 50px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================
+           ADAPTAÇÃO DESKTOP
+        ======================== */
+        @media (min-width: 768px) {
+            body { padding-bottom: 0; }
+            .bottom-nav { display: none; }
+            .desktop-wpp { display: flex; }
+            
+            .hero { padding: 50px 20px; }
+            .avatar-container { width: 140px; height: 140px; }
+            .hero h1 { font-size: 2.3rem; }
+
+            .section-wrapper { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+            .section-header { justify-content: center; margin-bottom: 30px; }
+            .section-header h2 { font-size: 2rem; }
+
+            .swipe-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+                overflow: visible;
+                padding: 0;
+            }
+            .service-card, .review-card { max-width: 100%; flex: auto; }
+            .service-info p { -webkit-line-clamp: 5; }
+
+            .location-card { max-width: 800px; margin: 0 auto; }
+
+            .insta-grid {
+                justify-content: center;
+                overflow: visible;
+                gap: 15px;
+            }
+            .insta-card { flex: 0 0 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Profile Hero -->
+    <header class="hero slide-up">
+        <div class="avatar-container">
+            <img src="logo.jpg" alt="Club Pele Única">
+        </div>
+        <h1 class="serif">Club Pele Única</h1>
+        <p>Por Vanessa Silva</p>
+
+        <!-- Selo de Avaliações Google -->
+        <a href="#avaliacoes" class="google-badge" style="text-decoration: none; color: inherit;">
+            <i class="fab fa-google"></i>
+            <span class="stars">★★★★★</span>
+            <span><strong>5,0</strong> (61 avaliações)</span>
+        </a>
+
+        <a href="https://wa.me/5547992888024?text=Olá! Gostaria de agendar uma avaliação no Club Pele Única." target="_blank" class="btn btn-primary">
+            <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Agendar Avaliação
+        </a>
+    </header>
+
+    <!-- Vitrine de Serviços -->
+    <section id="servicos" class="section-wrapper slide-up">
+        <div class="section-header">
+            <h2 class="serif">Nossos Procedimentos</h2>
+        </div>
+        
+        <div class="swipe-container">
+            <!-- Serviço 1 -->
+            <div class="service-card">
+                <img src="01.jpg" alt="Laser Pisom" class="service-img">
+                <div class="service-info">
+                    <h3>Laser Pisom ✨</h3>
+                    <p>Renova a pele, uniformiza o tom, fecha poros, melhora cicatrizes de acne, linhas finas, manchas (melasma), promove efeito BB Glow e estimula o folículo capilar.</p>
+                    <a href="https://wa.me/5547992888024?text=Olá! Quero saber mais sobre o Laser Pisom." class="btn-sm" target="_blank">Quero agendar</a>
+                </div>
+            </div>
+
+            <!-- Serviço 2 -->
+            <div class="service-card">
+                <img src="02.jpg" alt="Preenchimento Labial" class="service-img">
+                <div class="service-info">
+                    <h3>Preenchimento Labial ✨</h3>
+                    <p>Realce a beleza dos seus lábios! Define contorno, corrige assimetrias, hidrata e dá aquele volume lindo e natural! 💉💋</p>
+                    <a href="https://wa.me/5547992888024?text=Olá! Quero saber mais sobre o Preenchimento Labial." class="btn-sm" target="_blank">Quero agendar</a>
+                </div>
+            </div>
+
+            <!-- Serviço 3 -->
+            <div class="service-card">
+                <img src="03.jpg" alt="Secagem de Vasinhos" class="service-img">
+                <div class="service-info">
+                    <h3>Secagem de Vasinhos ✨</h3>
+                    <p>Técnica segura e altamente eficaz que elimina vasinhos nas pernas usando glicose. Recupere a beleza das suas pernas.</p>
+                    <a href="https://wa.me/5547992888024?text=Olá! Quero saber mais sobre a Secagem de Vasinhos." class="btn-sm" target="_blank">Quero agendar</a>
+                </div>
+            </div>
+
+            <!-- Serviço 4 -->
+            <div class="service-card">
+                <img src="04.jpg" alt="Massagem" class="service-img">
+                <div class="service-info">
+                    <h3>Massagem ✨</h3>
+                    <p>Relaxante, modeladora e drenagem. Alívio, bem-estar, redução de medidas e desinchar em um toque de cuidado. 💆🏻‍♀️</p>
+                    <a href="https://wa.me/5547992888024?text=Olá! Quero agendar uma Massagem." class="btn-sm" target="_blank">Quero agendar</a>
+                </div>
+            </div>
+
+            <!-- Serviço 5 -->
+            <div class="service-card">
+                <img src="05.jpg" alt="Protocolo para Celulite" class="service-img">
+                <div class="service-info">
+                    <h3>Protocolo Celulite 🍑</h3>
+                    <p>Reduz a celulite, melhora o aspecto da pele e ativa a circulação. Mais firmeza e menos ondulações! ✨</p>
+                    <a href="https://wa.me/5547992888024?text=Olá! Quero saber mais sobre o Protocolo para Celulite." class="btn-sm" target="_blank">Quero agendar</a>
+                </div>
+            </div>
+
+            <!-- Serviço 6 -->
+            <div class="service-card">
+                <img src="06.jpg" alt="Depilação a LED" class="service-img">
+                <div class="service-info">
+                    <h3>Depilação a LED ✨</h3>
+                    <p>Tecnologia moderna, eficaz e confortável com ponteira refrigerada. Segura para todos os tons de pele. ✨</p>
+                    <a href="https://wa.me/5547992888024?text=Olá! Quero saber mais sobre a Depilação a LED." class="btn-sm" target="_blank">Quero agendar</a>
+                </div>
+            </div>
+
+            <!-- Serviço 7 -->
+            <div class="service-card">
+                <img src="07.jpg" alt="Bioestimulador de Colágeno" class="service-img">
+                <div class="service-info">
+                    <h3>Bioestimulador ✨</h3>
+                    <p>Estimula a produção natural do colágeno, trata a flacidez e melhora a firmeza da pele de forma duradoura! ✨</p>
+                    <a href="https://wa.me/5547992888024?text=Olá! Quero saber mais sobre o Bioestimulador de Colágeno." class="btn-sm" target="_blank">Quero agendar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos (Google Reviews) -->
+    <section id="avaliacoes" class="section-wrapper slide-up">
+        <div class="section-header">
+            <h2 class="serif">O que dizem nossas clientes</h2>
+        </div>
+
+        <div class="swipe-container">
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div>
+                    <div class="review-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">
+                            <h4>Pedro</h4>
+                            <span class="stars">★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="review-text">"Amei o trabalho da Vanessa!! Uma excelente profissional, sempre cuidando muito bem da minha pele! Super recomendo."</p>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fab fa-google"></i> Avaliação no Google</span>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div>
+                    <div class="review-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Maria Valda</h4>
+                            <span class="stars">★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="review-text">"Experiência ótima. Sinto-me muito especial sendo atendida pela Vanessa. Ela faz eu me sentir como rainha. Trata-me como se eu fosse única. Local muito acolhedor."</p>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fab fa-google"></i> Avaliação no Google</span>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-card">
+                <div>
+                    <div class="review-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info">
+                            <h4>Aline Lorandi</h4>
+                            <span class="stars">★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="review-text">"Lugar incrível. A gente se sente na sala de casa mesmo sabe?! A Vanessa é uma pessoa fantástica. Além de cuidar muito bem da nossa pele, estar com ela é terapêutico... o carinho e atenção!"</p>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fab fa-google"></i> Local Guide no Google</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Localização & Horário -->
+    <section id="local" class="section-wrapper slide-up">
+        <div class="section-header">
+            <h2 class="serif">Nosso Espaço</h2>
+        </div>
+
+        <div class="location-card">
+            <div class="location-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="location-text">
+                    <h3>Edifício LGN Business Center</h3>
+                    <p>Próximo ao Shopping - R. Samuel Heusi, 178 - Sala 705 - Centro, Itajaí - SC</p>
+                    <div class="badge-open">Aberto agora · Fecha às 20:00</div>
+                </div>
+            </div>
+            
+            <a href="https://maps.google.com/?q=R.+Samuel+Heusi,+178+-+Centro,+Itajaí+-+SC" target="_blank" class="btn btn-secondary" style="margin-top: 15px;">
+                <i class="fas fa-directions"></i> Ver Rotas no Google Maps
+            </a>
+        </div>
+    </section>
+
+    <!-- Galeria Instagram -->
+    <section class="section-wrapper slide-up">
+        <div class="section-header">
+            <h2 class="serif">Siga no Instagram</h2>
+        </div>
+
+        <div class="insta-grid">
+            <a href="https://www.instagram.com/vanessasilva.unica/p/DRUon3GFjhn/" target="_blank" class="insta-card">
+                <img src="insta01.jpg" alt="Instagram Post 1">
+                <div class="insta-overlay"><i class="fab fa-instagram fa-2x"></i></div>
+            </a>
+            <a href="https://www.instagram.com/clubpeleunica/p/DRkZvGUEZvJ/" target="_blank" class="insta-card">
+                <img src="insta02.jpg" alt="Instagram Post 2">
+                <div class="insta-overlay"><i class="fab fa-instagram fa-2x"></i></div>
+            </a>
+            <a href="https://www.instagram.com/clubpeleunica/p/DVmZhPFkfGp/" target="_blank" class="insta-card">
+                <img src="insta03.jpg" alt="Instagram Post 3">
+                <div class="insta-overlay"><i class="fab fa-instagram fa-2x"></i></div>
+            </a>
+            <a href="https://www.instagram.com/clubpeleunica/reel/De7p191RQy4/" target="_blank" class="insta-card">
+                <img src="insta04.jpg" alt="Instagram Post 4">
+                <div class="insta-overlay"><i class="fab fa-play fa-2x"></i></div>
+            </a>
+            <a href="https://www.instagram.com/vanessasilva.unica/p/DezVTXklloS/" target="_blank" class="insta-card">
+                <img src="insta05.jpg" alt="Instagram Post 5">
+                <div class="insta-overlay"><i class="fab fa-instagram fa-2x"></i></div>
+            </a>
+        </div>
+
+        <div style="padding: 0 20px; text-align: center; margin-top: 10px;">
+            <a href="https://www.instagram.com/clubpeleunica/" target="_blank" class="btn btn-secondary" style="margin: 0 auto;">
+                <i class="fab fa-instagram"></i> @clubpeleunica
+            </a>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p class="serif" style="font-size: 1.1rem; font-weight: 600;">Club Pele Única</p>
+        <p>Por Vanessa Silva — Estética Avançada</p>
+        <br>
+        <p>&copy; 2024 Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Barra de Navegação App (Apenas Mobile/Tablet) -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </a>
+        <a href="#servicos" class="nav-item">
+            <i class="fas fa-sparkles"></i>
+            <span>Serviços</span>
+        </a>
+        <a href="#local" class="nav-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Local</span>
+        </a>
+        <a href="https://wa.me/5547992888024?text=Olá! Vim pelo site e gostaria de agendar um horário." target="_blank" class="nav-item nav-whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <span>Agendar</span>
+        </a>
+    </nav>
+
+    <!-- Botão WhatsApp Flutuante (Apenas Computador) -->
+    <a href="https://wa.me/5547992888024?text=Olá! Vim pelo site e gostaria de agendar um horário." target="_blank" class="desktop-wpp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts de Interação -->
+    <script>
+        // Animação de Surgimento Suave ao Rolar
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.slide-up').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
